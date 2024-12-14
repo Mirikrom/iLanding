@@ -1,0 +1,48 @@
+{% load static %}
+{% for section in sections %}
+<section id="features" class="features section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>{{ section.title }}</h2>
+        <p>{{ section.description }}</p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+                {% for tab in section.tabs.all %}
+                <li class="nav-item">
+                    <a class="nav-link {% if forloop.first %}active show{% endif %}" data-bs-toggle="tab" data-bs-target="#features-tab-{{ forloop.counter }}">
+                        <h4>{{ tab.title }}</h4>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+            {% for tab in section.tabs.all %}
+            <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="features-tab-{{ forloop.counter }}">
+                <div class="row">
+                    <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                        <h3>{{ tab.heading }}</h3>
+                        <p class="fst-italic">{{ tab.description }}</p>
+                        <ul>
+                          {% if tab.get_points_as_list %}
+                            {% for point in tab.get_points_as_list %}
+                                <li><i class="bi bi-check2-all"></i> <span>{{ point }}</span></li>
+                            {% endfor %}
+                          {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2 text-center">
+                        <img src="{{ tab.image.url }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endfor %}

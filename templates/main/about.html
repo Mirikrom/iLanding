@@ -1,0 +1,86 @@
+{% load static %}
+{% if abouts %}
+	<section id="about" class="about section">
+
+		<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+			<div class="row gy-4 align-items-center justify-content-between">
+				{% for about in abouts %}
+					<div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
+						<span class="about-meta">
+							{% if about.url %}
+								<a href="{{ about.url }}" target="_blank">{{ about.url_name }}</a>
+							{% endif %}
+						</span>
+						<h2 class="about-title">{{ about.title }}</h2>
+						<p class="about-description">{{ about.description }}</p>
+
+						<div class="row feature-list-wrapper">
+              {% if about.feature_list_split %}
+                  {% with first_half=about.feature_list_split|slice:":3" %}
+                  {% with second_half=about.feature_list_split|slice:"3:" %}
+                      <div class="col-md-6">
+                          <ul class="feature-list">
+                              {% for feature in first_half %}
+                                  <li>
+                                      <i class="bi bi-check-circle-fill"></i>
+                                      {{ feature }}
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+          
+                      <div class="col-md-6">
+                          <ul class="feature-list">
+                              {% for feature in second_half %}
+                                  <li>
+                                      <i class="bi bi-check-circle-fill"></i>
+                                      {{ feature }}
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  {% endwith %}
+                  {% endwith %}
+              {% endif %}
+          </div>
+
+						<div class="info-wrapper">
+							<div class="row gy-4">
+								<div class="col-lg-7">
+									<div class="contact-info d-flex align-items-center gap-2">
+										<i class="bi bi-telephone-fill"></i>
+										<div>
+											<p class="contact-label">{{ about.phone_label }}</p>
+											<p class="contact-number">{{ about.phone_number }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="image-wrapper">
+							<div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
+								<img src="{{ about.main_image.url }}" alt="Business Meeting" class="img-fluid main-image rounded-4">
+								<img src="{{ about.small_image.url }}" alt="Team Discussion" class="img-fluid small-image rounded-4"> 
+							</div>
+							<div class="experience-badge floating">
+								<h3>15+
+									<span>Years</span>
+								</h3>
+								<p>Of experience in business service</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="container text-center py-5">
+			<h2>Hozircha ma'lumotlar yo'q</h2>
+			<p>Admin panelda About bo'limi uchun ma'lumotlarni kiriting</p>
+		</div>
+	</section>
+{% endif %}

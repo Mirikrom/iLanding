@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - iLanding
+{% endblock %}
+
+<!-- {% block body_class %}index-page{% endblock %} -->
+
+{% block content %}
+	<!-- Hero Section -->
+	{% include 'main/hero.html' %}
+	<!-- End Hero Section -->
+
+	<!-- About Section -->
+	{% include 'main/about.html' %}
+	<!-- End About Section -->
+
+	<!-- Features Section -->
+	{% include 'main/features.html' %}
+	<!-- End Features Section -->
+
+	<!-- Services Section -->
+	{% include 'main/services.html' %}
+	<!-- End Services Section -->
+
+	<!-- Pricing Section -->
+	{% include 'main/pricing.html' %}
+	<!-- End Pricing Section -->
+
+	<!-- Contact Section -->
+{% include 'main/contact.html' %}
+	<!-- End Contact Section -->
+	
+{% endblock %}

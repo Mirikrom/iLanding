@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="basicpage" class="basicpage">
+<main id="main">
+    <!-- ======= Basic Page Section ======= -->
+    <section id="hero-alt" class="hero-alt d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <h2 data-aos="fade-up">{{ basic_page.title }}</h2>
+                    <blockquote data-aos="fade-up" data-aos-delay="100">
+                        <p>{{ basic_page.content|safe }}</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if basic_page.image %}
+    <section class="basic-page-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5">
+                        <img src="{{ basic_page.image.url }}" alt="{{ basic_page.title }}" class="img-fluid rounded shadow" data-aos="zoom-in">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if not basic_page %}
+    <div class="container mt-5">
+        <div class="alert alert-info text-center">
+            Ma'lumot topilmadi.
+        </div>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}

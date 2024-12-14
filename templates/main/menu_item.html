@@ -1,0 +1,15 @@
+<li class="{% if menu.children %}dropdown{% endif %}">
+	<a href="{{ menu.item.url }}">
+		{{ menu.item.title }}
+		{% if menu.children %}
+			<i class="bi bi-chevron-down toggle-dropdown"></i>
+		{% endif %}
+	</a>
+	{% if menu.children %}
+		<ul>
+			{% for child in menu.children %}
+				{% include 'main/menu_item.html' with menu=child %}
+			{% endfor %}
+		</ul>
+	{% endif %}
+</li>

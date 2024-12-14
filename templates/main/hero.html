@@ -1,0 +1,66 @@
+{% load static %}
+<section id="hero" class="hero section">
+  {% if hero %}
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            <div class="company-badge mb-4">
+              <i class="bi bi-gear-fill me-2"></i>
+              {{ hero.badge_text }}
+            </div>
+            {{ site_config }}
+            <h1 class="mb-4">
+              <span class="accent-text">{{ hero.title_line }}</span>
+            </h1>
+
+            <p class="mb-4 mb-md-5">
+              {{ hero.description }}
+            </p>
+
+            <div class="hero-buttons">
+              {% if hero.start_button_text and hero.start_button_url %}
+                <a href="{{ hero.start_button_url }}" class="btn btn-primary me-0 me-sm-2 mx-1">
+                  {{ hero.start_button_text }}
+                </a>
+              {% endif %}
+              
+              {% if hero.video_button_text and hero.video_url or hero.video_file %}
+								<a href="{% if hero.video_file %}{{ hero.video_file.url }}{% else %}{{ hero.video_url }}{% endif %}" class="btn btn-link mt-2 mt-sm-0 glightbox">
+									<i class="bi bi-play-circle me-1"></i>
+									{{ hero.video_button_text }}
+								</a>
+							{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+            {% if hero.hero_image %}
+              <img src="{{ hero.hero_image.url }}" alt="Hero Image" class="img-fluid">
+            {% else %}
+              <img src="{% static 'images/default-hero.jpg' %}" alt="Default Hero Image" class="img-fluid">
+            {% endif %}
+
+            <div class="customers-badge">
+              <div class="customer-avatars">
+                {% for avatar in hero.visible_avatars %}
+                  <img src="{{ avatar.image.url }}" alt="{{ avatar.alt_text }}" class="avatar">
+                {% endfor %}
+                {% if hero.additional_customers_count > 0 %}
+                  <span class="avatar more">{{ hero.additional_customers_count }}+</span>
+                {% endif %}
+              </div>
+              <p class="mb-0 mt-2">{{ hero.customers_text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  {% else %}
+    <div class="container text-center py-5">
+      <h2>Hozircha ma'lumotlar yo'q</h2>
+      <p>Admin panelda Hero section uchun ma'lumotlarni kiriting</p>
+    </div>
+  {% endif %}
+</section>
